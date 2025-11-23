@@ -141,6 +141,79 @@
 
   runSplitFor('csharp');
   if (langSelect) langSelect.addEventListener('change', (e) => runSplitFor(e.target.value));
+
+  // --- Music Player ---
+  const musicToggle = document.getElementById('musicToggle');
+  const backgroundMusic = document.getElementById('backgroundMusic');
+  
+  if (musicToggle && backgroundMusic) {
+    // Set volume to 50%
+    backgroundMusic.volume = 0.5;
+    
+    // Check if music is currently playing
+    function updateButtonState() {
+      const icon = musicToggle.querySelector('.music-icon');
+      if (!backgroundMusic.paused && !backgroundMusic.ended) {
+        if (icon) {
+          icon.textContent = '||';
+          icon.classList.remove('play-icon');
+          icon.classList.add('pause-icon');
+        }
+        musicToggle.classList.add('playing');
+      } else {
+        if (icon) {
+          icon.textContent = '';
+          icon.classList.remove('pause-icon');
+          icon.classList.add('play-icon');
+        }
+        musicToggle.classList.remove('playing');
+      }
+    }
+    
+    // Initial button state
+    updateButtonState();
+    
+    // Toggle play/pause on click
+    musicToggle.addEventListener('click', () => {
+      if (backgroundMusic.paused || backgroundMusic.ended) {
+        // Play music
+        backgroundMusic.play().then(() => {
+          updateButtonState();
+        }).catch((error) => {
+          console.error('Error playing music:', error);
+          const icon = musicToggle.querySelector('.music-icon');
+          if (icon) {
+            icon.textContent = '';
+            icon.classList.remove('pause-icon');
+            icon.classList.add('play-icon');
+          }
+        });
+      } else {
+        // Pause music
+        backgroundMusic.pause();
+        updateButtonState();
+      }
+    });
+    
+    // Update button when music state changes
+    backgroundMusic.addEventListener('play', updateButtonState);
+    backgroundMusic.addEventListener('pause', updateButtonState);
+    backgroundMusic.addEventListener('ended', updateButtonState);
+    
+    // Handle errors
+    backgroundMusic.addEventListener('error', (e) => {
+      console.error('Audio error:', e);
+      const icon = musicToggle.querySelector('.music-icon');
+      if (icon) {
+        icon.textContent = '';
+        icon.classList.remove('pause-icon');
+        icon.classList.add('play-icon');
+      }
+      musicToggle.classList.remove('playing');
+      musicToggle.style.opacity = '0.5';
+      musicToggle.title = 'Erro ao carregar música';
+    });
+  }
 })();
 
 
