@@ -7,7 +7,7 @@
     <meta name="description" content="Gabriel Alves — Software Engineer." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
 
     <!-- Open Graph -->
@@ -24,13 +24,18 @@
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="#top" aria-label="Início">
-          <span class="brand-dot" aria-hidden="true"></span>
-          <span class="brand-text">Gabriel Alves</span>
         </a>
         <nav class="nav">
+          <button id="musicToggle" class="music-toggle" aria-label="Reproduzir música">
+            <span class="music-icon play-icon"></span>
+          </button>
           <button id="themeToggle" class="theme-toggle" aria-label="Alternar tema">☾</button>
         </nav>
       </div>
+      <audio id="backgroundMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        <source src="music.ogg" type="audio/ogg">
+      </audio>
     </header>
 
     <main id="top">
@@ -72,18 +77,36 @@
             <a class="chip" href="https://github.com/gabrielvesal" rel="noopener" target="_blank">GitHub</a>
             <a class="chip" href="mailto:g.a.talves2019@gmail.com">Email</a>
           </div>
-          <!-- Astronaut orbiting the hero text -->
-          <div class="astronaut" aria-hidden="true">
-            <model-viewer id="astronautMV"
-                          src="https://science.nasa.gov/3d-resources/astronaut/Astronaut.glb"
-                          alt="NASA Astronaut 3D"
-                          disable-zoom
-                          autoplay
-                          interaction-prompt="none"
-                          exposure="0.9"
-                          environment-image="neutral"
-                          shadow-intensity="0.2">
-            </model-viewer>
+          <!-- Photos in place of statue -->
+          <div class="hero-photos">
+            <div class="photo-frame photo-main">
+              <img src="gabriel.jpeg" alt="Gabriel Alves" class="photo-image" />
+            </div>
+            <div class="photo-frame photo-secondary">
+              <img src="programming.jpeg" alt="Programming" class="photo-image" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="inspiration-section container">
+        <div class="inspiration-content">
+          <div class="inspiration-item statue-item">
+            <div class="statue-container-inspiration">
+              <img src="statue.png" alt="Sculpting oneself" class="statue-image-inspiration" />
+              <p class="statue-quote-inspiration">Do not wait to be shaped by the world — sculpt yourself.</p>
+            </div>
+          </div>
+          
+          <div class="inspiration-item battle-item">
+            <div class="battle-image-wrapper">
+              <div class="battle-label battle-label-left">Programmer</div>
+              <img src="battle.png" alt="Warrior defeating bug" class="battle-image" />
+              <div class="battle-label battle-label-right">Bug</div>
+            </div>
+            <div class="inspiration-quote">
+              <p class="quote-text">Challenges forge the programmer within.</p>
+            </div>
           </div>
         </div>
       </section>
